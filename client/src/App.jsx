@@ -1,16 +1,13 @@
+import Comments from "./components/Comments";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <div className="attribution">
-        Challenge by{" "}
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
-          Frontend Mentor
-        </a>
-        . Coded by <a href="#">Elizabeth Lankford</a>.
-      </div>
-    </>
+    <div className="body">
+      <Comments />
+      <Footer />
+    </div>
   );
 }
 
