@@ -7,6 +7,11 @@ function Comments() {
       <div className="comment-container" key={comment.id}>
         <div className="comment">
           <div className="user">
+            <img
+              height={50}
+              src={`../assets/images/avatars/image-amyrobson.png`}
+              alt="profile image"
+            />
             <h5>{comment.user.username}</h5>
             <p>{comment.createdAt}</p>
             <p>score: {comment.score}</p>
