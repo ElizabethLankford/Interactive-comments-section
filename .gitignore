@@ -15,3 +15,4 @@
 .DS_Store
 .prettierignore
 client/node_modules
+server/node_modules
