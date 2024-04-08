@@ -1,22 +1,30 @@
 import { comments } from "../../data.json";
-
+import Plus from "../assets/images/icon-plus.svg?react";
+import Minus from "../assets/images/icon-minus.svg?react";
 function Comments() {
   console.log(comments);
   const commentsEl = comments.map((comment) => {
     return (
       <div className="comment-container" key={comment.id}>
         <div className="comment">
-          <div className="user">
-            <img
-              height={50}
-              src={`../assets/images/avatars/image-amyrobson.png`}
-              alt="profile image"
-            />
-            <h5>{comment.user.username}</h5>
-            <p>{comment.createdAt}</p>
-            <p>score: {comment.score}</p>
+          <div className="score">
+            <Plus />
+            {comment.score}
+            <Minus />
           </div>
-          {comment.content}
+          <div className="comment-inner">
+            <div className="user">
+              <img
+                height={50}
+                src={`../assets/images/avatars/image-amyrobson.png`}
+                alt="profile image"
+              />
+              <h5>{comment.user.username}</h5>
+              <p>{comment.createdAt}</p>
+              <p>score: {comment.score}</p>
+            </div>
+            {comment.content}
+          </div>
         </div>
         <div className="replies">
           {comment.replies.length
@@ -35,6 +43,7 @@ function Comments() {
   return (
     <>
       <p>Comments</p>
+
       {commentsEl}
     </>
   );

@@ -6,9 +6,14 @@
 background-color: aliceblue;
 border: 1px solid black;
 display: flex;
-flex-direction: column;
 padding: 1em;
 margin: 1em;
+}
+.score{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 .user{
 display: flex;
