@@ -17,12 +17,22 @@ margin: 1em;
 }
 .user{
 display: flex;
-gap: 1em;
+justify-content: space-between;
+
+}
+.user-inner{
+  display: flex;
+  gap: 1em;
 }
 .replies{
   display: flex;
   flex-direction: column;
   
+}
+.to-reply{
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 .reply{
   background-color: aliceblue;
