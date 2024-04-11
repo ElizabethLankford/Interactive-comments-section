@@ -1,10 +1,12 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useAsync } from "../hooks/useAsync";
 import { getPost } from "../services/posts";
 
 const Context = createContext();
-
+export function usePost() {
+  return useContext(Context);
+}
 // eslint-disable-next-line react/prop-types
 export function PostProvider({ children }) {
   const { id } = useParams();
