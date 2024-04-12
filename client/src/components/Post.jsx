@@ -8,7 +8,11 @@ export function Post() {
       <h1>{post.title}</h1>
       <article>{post.body}</article>
       <h3>Comments</h3>
-      <section>{post.comments}</section>
+      <section>
+        {post.comments.map((comment) => {
+          return <p key={comment.id}>{comment.message}</p>;
+        })}
+      </section>
     </>
   );
 }
