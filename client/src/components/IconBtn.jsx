@@ -1,3 +1,4 @@
+// eslint-disable-next-line react/prop-types
 export default function IconBtn({ Icon, isActive, color, children, ...props }) {
   return (
     <button
