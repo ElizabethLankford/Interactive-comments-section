@@ -23,10 +23,20 @@ export function PostProvider({ children }) {
     return group;
   }, [post?.comments]);
 
+  function getReplies(parentId) {
+    return commentsByParentId[parentId];
+  }
+
   if (loading) return <h1>loading...</h1>;
   if (error) return <h1>{error}</h1>;
   return (
-    <Context.Provider value={{ post: { id, ...post } }}>
+    <Context.Provider
+      value={{
+        post: { id, ...post },
+        getReplies,
+        rootComments: commentsByParentId[null],
+      }}
+    >
       {children}
     </Context.Provider>
   );
