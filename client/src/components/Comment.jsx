@@ -14,7 +14,8 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 export default function Comment({ id, message, user, createdAt }) {
-  const { post, getReplies, createLocalComment } = usePost();
+  const { post, getReplies, createLocalComment, updateLocalComment } =
+    usePost();
   const createCommentFn = useAsyncFN(createComment);
   const updateCommentFn = useAsyncFN(updateComment);
   const childComments = getReplies(id);
@@ -35,8 +36,7 @@ export default function Comment({ id, message, user, createdAt }) {
       .execute({ postId: post.id, message, id })
       .then((comment) => {
         setIsEditing(false);
-        console.log(comment);
-        //createLocalComment(comment);
+        updateLocalComment(id, comment.message);
       });
   }
 
