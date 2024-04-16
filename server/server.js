@@ -85,12 +85,12 @@ app.post("/posts/:id/comments", async (req, res) => {
   );
 });
 
-app.put("/posts/:id/comments/commentId", async (req, res) => {
+app.put("/posts/:postId/comments/:commentId", async (req, res) => {
   if (req.body.message === "" || req.body.message == null) {
     return res.send(app.httpErrors.badRequest("Message is required"));
   }
   const { userId } = await prisma.comment.findUnique({
-    where: { id: req.params.id },
+    where: { id: req.params.commentId },
     select: { userId: true },
   });
   if (userId !== req.cookies.userId) {
