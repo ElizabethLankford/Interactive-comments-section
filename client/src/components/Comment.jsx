@@ -6,7 +6,11 @@ import IconBtn from "./IconBtn";
 import { FaEdit, FaHeart, FaReply, FaTrash } from "react-icons/fa";
 import { CommentForm } from "./CommentForm";
 import { useAsyncFN } from "../hooks/useAsync";
-import { createComment, updateComment } from "../services/comments";
+import {
+  createComment,
+  updateComment,
+  deleteComment,
+} from "../services/comments";
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
   dateStyle: "medium",
@@ -14,10 +18,16 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 export default function Comment({ id, message, user, createdAt }) {
-  const { post, getReplies, createLocalComment, updateLocalComment } =
-    usePost();
+  const {
+    post,
+    getReplies,
+    createLocalComment,
+    updateLocalComment,
+    deleteLocalComment,
+  } = usePost();
   const createCommentFn = useAsyncFN(createComment);
   const updateCommentFn = useAsyncFN(updateComment);
+  const deleteCommentFn = useAsyncFN(deleteComment);
   const childComments = getReplies(id);
   const [areChildrenHidden, setAreChildrenHidden] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
@@ -38,6 +48,11 @@ export default function Comment({ id, message, user, createdAt }) {
         setIsEditing(false);
         updateLocalComment(id, comment.message);
       });
+  }
+  function onCommentDelete() {
+    return deleteCommentFn
+      .execute({ postId: post.id, id })
+      .then((comment) => deleteLocalComment(comment.id));
   }
 
   return (
@@ -75,7 +90,12 @@ export default function Comment({ id, message, user, createdAt }) {
             Icon={FaEdit}
             aria-label={isEditing ? "Cancel Edit" : "Edit"}
           />
-          <IconBtn Icon={FaTrash} aria-label="Delete" />
+          <IconBtn
+            disable={deleteCommentFn.loading.toString()}
+            onClick={onCommentDelete}
+            Icon={FaTrash}
+            aria-label="Delete"
+          />
         </div>
         {isReplying && (
           <div>

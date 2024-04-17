@@ -50,6 +50,11 @@ export function PostProvider({ children }) {
       });
     });
   }
+  function deleteLocalComment(id) {
+    setComments((prevComments) => {
+      return prevComments.filter((comment) => comment.id !== id);
+    });
+  }
 
   if (loading) return <h1>loading...</h1>;
   if (error) return <h1>{error}</h1>;
@@ -61,6 +66,7 @@ export function PostProvider({ children }) {
         rootComments: commentsByParentId[null],
         createLocalComment,
         updateLocalComment,
+        deleteLocalComment,
       }}
     >
       {children}
