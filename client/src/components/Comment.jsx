@@ -18,6 +18,9 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 export default function Comment({ id, message, user, createdAt }) {
+  const [areChildrenHidden, setAreChildrenHidden] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const {
     post,
     getReplies,
@@ -29,9 +32,6 @@ export default function Comment({ id, message, user, createdAt }) {
   const updateCommentFn = useAsyncFN(updateComment);
   const deleteCommentFn = useAsyncFN(deleteComment);
   const childComments = getReplies(id);
-  const [areChildrenHidden, setAreChildrenHidden] = useState(false);
-  const [isReplying, setIsReplying] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
 
   function onCommentReply(message) {
     return createCommentFn
@@ -86,6 +86,7 @@ export default function Comment({ id, message, user, createdAt }) {
             Icon={FaReply}
             aria-label={isReplying ? "Cancel Reply" : "Reply"}
           />
+
           <IconBtn
             onClick={() => setIsEditing((prev) => !prev)}
             isActive={isEditing}
@@ -100,6 +101,9 @@ export default function Comment({ id, message, user, createdAt }) {
             color="danger"
           />
         </div>
+        {deleteCommentFn.error && (
+          <div className="error-msg mt-1">{deleteCommentFn.error}</div>
+        )}
         {isReplying && (
           <div>
             <CommentForm
