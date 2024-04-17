@@ -57,10 +57,12 @@ export default function Comment({ id, message, user, createdAt }) {
 
   return (
     <>
-      <div>
-        <div>
-          <span>{user.name}</span>
-          <span>{dateFormatter.format(Date.parse(createdAt))}</span>
+      <div className="comment">
+        <div className="header">
+          <span className="name">{user.name}</span>
+          <span className="date">
+            {dateFormatter.format(Date.parse(createdAt))}
+          </span>
         </div>
         {isEditing ? (
           <CommentForm
@@ -71,10 +73,10 @@ export default function Comment({ id, message, user, createdAt }) {
             error={updateCommentFn.error}
           />
         ) : (
-          <div>{message}</div>
+          <div className="message">{message}</div>
         )}
 
-        <div>
+        <div className="footer">
           <IconBtn Icon={FaHeart} aria-label="Like">
             2
           </IconBtn>
@@ -95,6 +97,7 @@ export default function Comment({ id, message, user, createdAt }) {
             onClick={onCommentDelete}
             Icon={FaTrash}
             aria-label="Delete"
+            color="danger"
           />
         </div>
         {isReplying && (

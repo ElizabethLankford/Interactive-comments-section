@@ -27,11 +27,8 @@ export function Post() {
           error={error}
           onSubmit={onCommentCreate}
         />
-        {/* {post.comments.map((comment) => {
-          return <p key={comment.id}>{comment.message}</p>;
-        })} */}
         {rootComments != null && rootComments.length > 0 && (
-          <div>
+          <div className="mt-4">
             <CommentList comments={rootComments} />
           </div>
         )}
