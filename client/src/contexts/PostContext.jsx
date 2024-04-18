@@ -56,6 +56,30 @@ export function PostProvider({ children }) {
     });
   }
 
+  function toggleLocalCommentLike(id, addLike) {
+    setComments((prevComments) => {
+      return prevComments.map((comment) => {
+        if (id === comment.id) {
+          if (addLike) {
+            return {
+              ...comment,
+              likeCount: comment.likeCount + 1,
+              likedByMe: true,
+            };
+          } else {
+            return {
+              ...comment,
+              likeCount: comment.likeCount - 1,
+              likedByMe: false,
+            };
+          }
+        } else {
+          return comment;
+        }
+      });
+    });
+  }
+
   if (loading) return <h1>loading...</h1>;
   if (error) return <h1>{error}</h1>;
   return (
@@ -67,6 +91,7 @@ export function PostProvider({ children }) {
         createLocalComment,
         updateLocalComment,
         deleteLocalComment,
+        toggleLocalCommentLike,
       }}
     >
       {children}
